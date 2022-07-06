@@ -1,0 +1,111 @@
+$board-bg-color: #0079bf;
+$navbar-app-bg-color: #0067a3;
+$navbar-board-bg-color: #0079bf;
+$column-width: 300px;
+$list-bg-color: #ebecf0;
+$border-column-radius: 5px;
+$card-border-radius: 3px;
+$column-header-heigth: 36px;
+$column-footer-heigth: 36px;
+$gap: 10px;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.3rem;
+}
+
+
+.trello-master{
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 40px 50px  1fr;
+  background-color: $board-bg-color;
+  .navbar{
+    padding-left: $gap;
+    display: flex;
+    align-items: center;
+  }
+  .app{
+    font-size: 1.5rem;
+    background-color: $navbar-app-bg-color;
+  }
+  .board{
+    font-size: 1.1rem;
+    background-color: $navbar-board-bg-color;
+  }
+  .board-columns{
+    display: flex;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+        -webkit-appearance: none;
+        height: 12px;
+      }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: darken($color: $list-bg-color, $amount: 15);
+      border-radius: 6px;
+      border: 3px solid $navbar-board-bg-color;
+    }
+    .column{
+      flex: 0 0 auto;
+      width:$column-width;
+      height: calc(100% - #{$gap});
+      margin-left: $gap;
+      >*{
+        background-color: $list-bg-color;
+        color: #333;
+        padding: 0 8px;
+      }
+      ul{
+        list-style: none;
+        margin: 0;
+        max-height: calc(100% - #{$column-header-heigth} - #{$column-footer-heigth});
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+          -webkit-appearance: none;
+          width: 12px;        
+        }
+        &::-webkit-scrollbar-thumb{
+          background-color: darken($color: $list-bg-color, $amount: 15);
+          border-radius: 6px;
+          border: 3px solid $list-bg-color;
+        }
+        li{
+          background-color: white;
+          padding: $gap;
+          border-radius: $card-border-radius;
+          box-shadow: 0 1px 1px rgba(0, 0 , 0 ,0.1);
+          &:not(:last-child){
+            margin-bottom: $gap;
+
+          }
+        }
+      }
+      img{
+        width: 100%;
+        height: calc(#{$column-width} / 2);
+        object-fit: cover;
+      }
+      header{
+        padding-left: 15px;
+        height: $column-header-heigth;
+        line-height: $column-header-heigth;
+        font-size: 16px;
+        font-weight: bold;
+        border-top-right-radius: $border-column-radius;
+        border-top-left-radius: $border-column-radius;
+      }
+      footer{
+        padding-left: 15px;
+        height: $column-footer-heigth;
+        line-height: $column-footer-heigth;
+        border-bottom-right-radius: $border-column-radius;
+        border-bottom-left-radius: $border-column-radius;
+      }
+    }
+  }
+}
